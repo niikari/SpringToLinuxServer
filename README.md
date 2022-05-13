@@ -115,6 +115,40 @@ Tämän jälkeen master -koneen piti vielä hyväksyä orja komennettavaksi
 Testasin vielä, että herra todella voi komentaa orjaa kahdella tavalla. Luomalla tilan "Helloworld" ja lähettämällä
 käskyn tulostaa ruudulle heimaailma.
 
+# Infran laittaminen kuntoon
+
+Ohjelmat, jotka tässä projektissa asennetaan ja asetukset, joita muutetaan on kuvattu salt "tilojen" kansioissa:
+
+- nginx
+- spring-käyttäjän luominen (kotihakemiston luominen)
+- java
+- maven
+- ufw
+- spring
+
+Salt aloittaa asentamalla tarvittaessa palomuurin ja tarkastaa, että portti 80 on auki. Tämän jälkeen asennetaan
+nginx ja muutetaan konfiguraatiota (Reverse Proxy -> yhteys porttiin 80 ohjataan localhost:8080). Sitten luodaan
+uusi käyttäjä (spring) sekä tälle kotikansio. Tämän jälkeen asennetaan git ja kloonataan ohjelmakoodi GitHubista.
+Lopuksi asennetaan java sekä maven -> tehdään ohjelmakoodista suoritettava .jar tiedosto -> tehdään tästä ajettava
+palvelu palvelimelle ja käynnistetään palvelu.
+
+Kaikki komennon toteutaan vain, jos tarvitaan (idempotentti). Eli muutoksia ei tehdä, jos muutoksia ei ole.
+
+Ennen tilan suorittamista on tarkistettava orja -koneen ip osoite ja laitettava se talteen leikepöydälle
+
+	$ hostname -I
+
+Tämän jälkeen laitetaan tämä ip-osoite nginx/java-app.conf -tiedostoon
+
+	server_name *ip-osoite*;
+
+Lopuksi suoritetaan tila
+
+	$ sudo salt '*' state.apply
+
+Avaa selaimella orjan ip-osoite
+
+
 
 
 
