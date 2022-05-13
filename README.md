@@ -84,6 +84,11 @@ Ja tarkastin jälleen version
 
 Master version tulee olla joko uudempi tai sama kuin orjien, jotta kaikki toimisi jatkossa.
 
+Vielä piti avata "reikä" palomuuriin Saltille (portit 4505, 4506)
+
+	$ sudo ufw allow 4505/tcp
+	$ sudo ufw allow 4506/tcp
+
 Tämän jälkeen katsoin master-koneen ip-osoitteen komennolla
 
 	$ hostname -I
