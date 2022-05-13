@@ -134,19 +134,26 @@ palvelu palvelimelle ja käynnistetään palvelu.
 
 Kaikki komennon toteutaan vain, jos tarvitaan (idempotentti). Eli muutoksia ei tehdä, jos muutoksia ei ole.
 
-Ennen tilan suorittamista on tarkistettava orja -koneen ip osoite ja laitettava se talteen leikepöydälle
+*Ennen* tilan suorittamista on tarkistettava orja -koneen ip osoite ja laitettava se talteen leikepöydälle
 
 	$ hostname -I
 
-Tämän jälkeen laitetaan tämä ip-osoite nginx/java-app.conf -tiedostoon
+*Tämän jälkeen siirrytään master -koneelle*
 
-	server_name *ip-osoite*;
+Kopioidaan tämän repositorion sisältö /srv/salt.
+
+Laitetaan tämä ip-osoite nginx/java-app.conf -tiedostoon
+
+	$ sudo /srv/salt/nginx
+	  server_name *ip-osoite*;
 
 Lopuksi suoritetaan tila
 
 	$ sudo salt '*' state.apply
 
 Avaa selaimella orjan ip-osoite
+
+Pienillä muutoksilla on mahdollista julkaista mikä tahansa Java Spring Boot sovellus tämän koodin avulla.
 
 
 
