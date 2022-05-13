@@ -39,17 +39,20 @@ Lopuksi aktivoin palomuurin
 
 	$ sudo ufw enable
 
-Tämän jälkeen loin molemmille saman nimisen käyttäjän ja annoin käyttäjälle tarvittavat oikeudet
+Tämän jälkeen loin molemmille saman nimisen käyttäjän,  annoin käyttäjälle tarvittavat oikeudet ja kirjauduin sisään
+ssh-yhteydellä
 
 	$ sudo adduser niiles
 	$ sudo adduser niiles sudo
 	$ sudo adduser niiles adm
+	$ ssh niiles@*koneen_nimi*
 
-Lopuksi estin root-käyttäjän mahdollisuuden kirjautua palvelimelle
+Lopuksi estin root-käyttäjän mahdollisuuden kirjautua palvelimelle ja käynnistin ssh.servicen uudelleen
 
 	$ sudo usermod --lock root
 	$ sudoedit /etc/ssh/sshd_config
 	  PermitRootLogin no
+	$ sudo systemctl restart ssh.service
 
 Kirjauduin uudelleen koneille juuri luomallani käyttäjällä: "niiles"
 
@@ -142,7 +145,7 @@ Kaikki komennon toteutaan vain, jos tarvitaan (idempotentti). Eli muutoksia ei t
 
 Kopioidaan tämän repositorion sisältö /srv/salt.
 
-Laitetaan tämä ip-osoite nginx/java-app.conf -tiedostoon
+Laitetaan orjan ip-osoite nginx/java-app.conf -tiedostoon
 
 	$ sudo /srv/salt/nginx
 	  server_name *ip-osoite*;
@@ -151,7 +154,19 @@ Lopuksi suoritetaan tila
 
 	$ sudo salt '*' state.apply
 
+| ![image](https://github.com/niikari/SpringToLinuxServer/blob/main/photos/ensimmainen%20suoritus.JPG?raw=true) |
+| :--: |
+| *Ensimmäinen suoritus (lopputulos)* |
+
+| ![image](https://github.com/niikari/SpringToLinuxServer/blob/main/photos/toinen%20suoritus.JPG?raw=true) |
+| :--: |
+| *Seuraavat suoritukset (lopputulos)* |
+
 Avaa selaimella orjan ip-osoite
+
+| ![image](https://github.com/niikari/SpringToLinuxServer/blob/main/photos/lopputulos.JPG?raw=true) |
+| :--: |
+| *Orjalla näkyvä palvelu saavutettavissa* |
 
 Pienillä muutoksilla on mahdollista julkaista mikä tahansa Java Spring Boot sovellus tämän koodin avulla.
 
