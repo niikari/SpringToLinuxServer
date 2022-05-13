@@ -70,7 +70,12 @@ Tämän jälkeen asensin koneelle salt-masterin ([Salt Projektin dokumetaatio](h
 Tämän jälkeen tarkistin version
 
 	$ salt-master --version
-	  salt-master 3002.6
+	  salt-master 3002.6	  
+	  
+Vielä piti avata "reiät" palomuuriin Saltille (portit 4505, 4506)
+
+	$ sudo ufw allow 4505/tcp
+	$ sudo ufw allow 4506/tcp
 
 Siirryin seuraavalle koneelle (tag: "minion") ja lähdin tekemään tästä orjaa. Aloitin päivittämällä paketinhallinnan
 ja tämän jälkeen asensin koneelle salt-minionin
@@ -83,11 +88,6 @@ Ja tarkastin jälleen version
 	  salt-minion 3002.6
 
 Master version tulee olla joko uudempi tai sama kuin orjien, jotta kaikki toimisi jatkossa.
-
-Vielä piti avata "reikä" palomuuriin Saltille (portit 4505, 4506)
-
-	$ sudo ufw allow 4505/tcp
-	$ sudo ufw allow 4506/tcp
 
 Tämän jälkeen katsoin master-koneen ip-osoitteen komennolla
 
