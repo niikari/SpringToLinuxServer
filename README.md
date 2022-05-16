@@ -152,7 +152,7 @@ Kopioidaan tämän repositorion sisältö /srv/salt.
 
 Laitetaan orjan ip-osoite nginx/java-app.conf -tiedostoon
 
-	$ sudo /srv/salt/nginx
+	$ sudo nano /srv/salt/nginx/java-app.conf
 	  server_name *ip-osoite*;
 
 Lopuksi suoritetaan tila
