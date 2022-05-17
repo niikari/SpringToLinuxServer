@@ -127,12 +127,143 @@ käskyn tulostaa ruudulle heimaailma.
 
 Ohjelmat, jotka tässä projektissa asennetaan ja asetukset, joita muutetaan on kuvattu salt "tilojen" kansioissa:
 
-- nginx
-- spring-käyttäjän luominen (kotihakemiston luominen)
-- java
-- maven
-- ufw
-- spring
+*Nginx*
+
+Konfiguraatiotiedoston sisältö (java-app.conf), sijaitsee /srv/salt/nginx
+
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        server_name 134.209.252.108;
+
+        location / {
+             proxy_pass http://localhost:8080/;
+             proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+             proxy_set_header X-Forwarded-Proto $scheme;
+             proxy_set_header X-Forwarded-Port $server_port;
+        }
+}
+```
+
+Asennetaan Nginx, asetetaan konfiguraatio-tiedoston sisältö ja käynnistetään nginx
+
+```
+nginx:
+  pkg.installed
+
+/etc/nginx/conf.d/java-app.conf:
+  file.managed:
+    - source: salt://nginx/java-app.conf
+
+nginx.service:
+  service.running:
+    - watch:
+      - file: /etc/nginx/conf.d/java-app.conf
+```
+
+*spring-käyttäjän luominen (kotihakemiston luominen)*
+
+```
+spring:
+  user.present:
+    - fullname: Spring Project User
+    - home: /home/spring
+```
+
+*Javan sekä mavenin asentaminen*
+
+```
+openjdk-11-jre:
+  pkg.installed
+
+maven:
+  pkg.installed
+```
+
+*Palomuurin asentaminen (portti 22 ja 80 auki)*
+
+```
+ufw:
+  pkg.installed
+
+ufw allow 22/tcp; ufw enable:
+  cmd.run:
+    - unless: "ufw status verbose | grep '22/tcp'"
+
+ufw allow 80/tcp; ufw enable:
+  cmd.run:
+    - unless: "ufw status verbose | grep '80/tcp'"
+```
+
+*Gitin lataaminen ja sovelluksen kloonaaminen GitHubista spring-käyttäjän kotihakemistoon*
+
+```
+git:
+  pkg.installed
+
+cd /home/spring;git clone https://github.com/niikari/autonlampimaksi.git:
+  cmd.run:
+    - unless: "ls /home/spring/autonlampimaksi | grep 'pom.xml'"
+
+
+```
+
+*Spring sovellus*
+
+Luodaan sovelluksesta ensin palvelu (daemon) -> tiedosto /srv/salt/spring/autolampimaksi.service
+
+```
+[Unit]
+Description=Spring Boot Autolampimaksi
+After=syslog.target
+After=network.target[Service]
+User=spring
+Type=simple
+
+[Service]
+ExecStart=/usr/bin/java -jar /home/spring/autonlampimaksi/target/autonlampimaksi-0.0.1-SNAPSHOT.jar                         >
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=autolampimaksi
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Käynnistetään palvelu (portti 80)
+
+```
+cd /home/spring/autonlampimaksi; mvn clean package:
+  cmd.run:
+    - unless: "ls -la /home/spring/autonlampimaksi | grep 'target'"
+
+/etc/systemd/system/autolampimaksi.service:
+  file.managed:
+    - source: salt://spring/autolampimaksi.service
+
+autolampimaksi.service:
+  service.running:
+    - watch:
+      - file: /etc/systemd/system/autolampimaksi.service
+
+
+```
+
+*top.sls tiedostossa määritellään missä järjestyksessä nämä tehdään*
+
+```
+base:
+  '*':
+    - ufw
+    - nginx
+    - adduser
+    - git
+    - javamaven
+    - spring
+```
 
 Salt aloittaa asentamalla tarvittaessa palomuurin ja tarkastaa, että portti 80 on auki. Tämän jälkeen asennetaan
 nginx ja muutetaan konfiguraatiota (Reverse Proxy -> yhteys porttiin 80 ohjataan localhost:8080). Sitten luodaan
