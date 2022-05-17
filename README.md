@@ -1,4 +1,4 @@
-## Java Spring Boot -sovelluksen julkaisu Linux palvelimelle koodina
+# Java Spring Boot -sovelluksen julkaisu Linux palvelimelle koodina
 
 Projektin tarkoituksena on helpottaa Java Spring Boot (tässä tapauksessa maven) sovelluksen viemistä Linux
 palvelimelle. Testattava ohjelma on luotu Haaga-Helian tietojenkäsittely tradenomitutkinnon yhteydessä kurssilla
@@ -13,7 +13,7 @@ palvelun sijaintia voidaan vaihtaa (mikäli palveluntarjoajan ehdot / hinta ei m
 minuutissa. Projektin lopputulosta voi käyttää hyväksi minkä tahansa Java Spring Boot Maven sovelluksen kanssa 
 muuttamalla vain paria kohtaa "infran koodissa".
 
-# Käytössä ollut laitteisto
+## Käytössä ollut laitteisto
 
 Loin itselleni tilin Digital Oceaniin ja tämän jälkeen loin kaksi "droplettia" (virtuaalikonetta). 
 
@@ -23,7 +23,7 @@ Loin itselleni tilin Digital Oceaniin ja tämän jälkeen loin kaksi "droplettia
 
 Nimesin koneet antamalla toiselle tagin "master" ja toiselle "minion".
 
-# Root käyttäjien "poistaminen" käytöstä
+## Root käyttäjien "poistaminen" käytöstä
 
 Aloitin molempien koneiden osalta konfiguroinnin samalla tavalla, Tero Karvisen kotisivuilta löytämilläni ohjeilla [First steps on a new virtual private server](https://terokarvinen.com/2017/first-steps-on-a-new-virtual-private-server-an-example-on-digitalocean/?fromSearch=server).
 
@@ -56,7 +56,7 @@ Lopuksi estin root-käyttäjän mahdollisuuden kirjautua palvelimelle ja käynni
 
 Kirjauduin uudelleen koneille juuri luomallani käyttäjällä: "niiles"
 
-# Herra / orja arkkitehtuuri käyttämällä Salttia
+## Herra / orja arkkitehtuuri käyttämällä Salttia
 
 Aloitin tekemällä ensimmäisestä (tag: "master") Herra -koneen. Aloitin päivittämällä paketinhallinnan
 
@@ -123,7 +123,7 @@ Tämän jälkeen master -koneen piti vielä hyväksyä orja komennettavaksi
 Testasin vielä, että herra todella voi komentaa orjaa kahdella tavalla. Luomalla tilan "Helloworld" ja lähettämällä
 käskyn tulostaa ruudulle heimaailma.
 
-# Infran laittaminen kuntoon
+## Infran laittaminen kuntoon
 
 Ohjelmat, jotka tässä projektissa asennetaan ja asetukset, joita muutetaan on kuvattu salt "tilojen" kansioissa:
 
