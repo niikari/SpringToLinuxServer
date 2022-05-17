@@ -233,7 +233,7 @@ SyslogIdentifier=autolampimaksi
 WantedBy=multi-user.target
 ```
 
-Käynnistetään palvelu (portti 80)
+Buildataan projekti ensin .jar -tiedostoksi, ja luodaan tästä palvelu palvelimelle -> käynnistetään palvelu
 
 ```
 cd /home/spring/autonlampimaksi; mvn clean package:
