@@ -306,6 +306,8 @@ Avaa selaimella orjan ip-osoite
 
 Pienillä muutoksilla on mahdollista julkaista mikä tahansa Java Spring Boot sovellus tämän koodin avulla.
 
+Projekti liittyy Haaga-Helian palvelintenhallintakurssiin. Muut tehdyt tehtävät löytyvät [täältä](https://niileskari.wordpress.com/)
+
 
 
 
