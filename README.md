@@ -315,7 +315,7 @@ Projekti liittyy Haaga-Helian palvelintenhallintakurssiin. Muut tehdyt tehtävä
 | *Tehtävä 3* | [package-file-service](https://niileskari.wordpress.com/2022/04/11/palvelintenhallinta-h2-package-file-service/) |
 | *Tehtävä 4* | [Aikajana](https://niileskari.wordpress.com/2022/04/21/palvelintenhallinta-h4-aikajana/) |
 | *Tehtävä 5* | [Uusi komento](https://niileskari.wordpress.com/2022/05/02/palvelintenhallinta-h5-uusi-komento/) |
-| *Tehtävä 6* | [Akkuna]([https://niileskari.wordpress.com/2022/04/04/h1/](https://niileskari.wordpress.com/2022/05/09/palvelintenhallinta-h6-akkuna/)) |
+| *Tehtävä 6* | [Akkuna]([https://niileskari.wordpress.com/2022/04/04/h1/](https://niileskari.wordpress.com/2022/05/09/palvelintenhallinta-h6-akkuna/) |
 
 
 
